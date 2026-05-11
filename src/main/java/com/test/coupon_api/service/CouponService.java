@@ -27,13 +27,13 @@ public class CouponService {
                 );
     }
 
-    public Coupon deleteCouponById(String id) {
+    public void deleteCouponById(String id) {
         Coupon coupon = findCouponById(id);
         if(coupon.getStatus() == CouponStatus.DELETED) {
             throw new CouponAlreadyDeletedException(String.format("O cupom de ID: %s ja esta deletado!", id));
         }
         coupon.setStatus(CouponStatus.DELETED);
 
-        return couponRepository.save(coupon);
+        couponRepository.save(coupon);
     }
 }
