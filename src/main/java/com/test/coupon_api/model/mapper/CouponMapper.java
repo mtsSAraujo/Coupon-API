@@ -7,7 +7,7 @@ import com.test.coupon_api.model.Coupon;
 import com.test.coupon_api.model.enums.CouponStatus;
 import org.springframework.stereotype.Component;
 
-import static com.test.coupon_api.Utils.CouponUtils.sanitizeCode;
+import static com.test.coupon_api.utils.CouponUtils.sanitizeCode;
 
 @Component
 public class CouponMapper {
