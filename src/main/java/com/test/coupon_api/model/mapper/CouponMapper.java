@@ -7,6 +7,8 @@ import com.test.coupon_api.model.Coupon;
 import com.test.coupon_api.model.enums.CouponStatus;
 import org.springframework.stereotype.Component;
 
+import java.math.RoundingMode;
+
 import static com.test.coupon_api.utils.CouponUtils.sanitizeCode;
 
 @Component
@@ -27,7 +29,7 @@ public class CouponMapper {
         return Coupon.builder()
                 .code(sanitizedCode)
                 .description(dto.description())
-                .discountValue(dto.discountValue())
+                .discountValue(dto.discountValue().setScale(2, RoundingMode.HALF_UP)) // Arredondar valor do desconto para 2 casas decimais
                 .expirationDate(dto.expirationDate())
                 .status(CouponStatus.ACTIVE)
                 .published(Boolean.TRUE.equals(dto.published()))

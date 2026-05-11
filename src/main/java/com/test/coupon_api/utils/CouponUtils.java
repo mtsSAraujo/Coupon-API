@@ -3,7 +3,7 @@ package com.test.coupon_api.utils;
 public class CouponUtils {
 
     private CouponUtils() {
-        // Classe util nao pode ser instanciada
+        /* This utility class should not be instantiated */
     }
 
     public static String sanitizeCode(String code) {

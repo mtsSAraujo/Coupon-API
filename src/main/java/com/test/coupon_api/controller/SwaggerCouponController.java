@@ -101,6 +101,14 @@ public interface SwaggerCouponController {
                             )
                     )
             ),
+            @ApiResponse(responseCode = "422", description = "O cupom com o ID enviado ja esta deletado!",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = ErrorApiResponse.class
+                            )
+                    )
+            ),
             @ApiResponse(responseCode = "500", description = "Erro genérico da API",
                     content = @Content(
                             mediaType = "application/json",
