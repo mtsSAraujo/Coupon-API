@@ -1,7 +1,7 @@
 package com.test.coupon_api.utils;
 
 public class CouponUtils {
-    
+
     private CouponUtils() {
         // Classe util nao pode ser instanciada
     }
