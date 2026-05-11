@@ -20,6 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import tools.jackson.databind.exc.InvalidFormatException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -220,6 +221,41 @@ class GlobalExceptionHandlerTest {
 
         assertEquals(
                 "A data de expiração possui um formato inválido. Utilize o padrão: yyyy-MM-ddTHH:mm:ss",
+                body.getMessage()
+        );
+
+        assertEquals(400, body.getCode());
+    }
+
+    @Test
+    void shouldHandleInvalidFormat() {
+
+        InvalidFormatException invalidFormatException =
+                new InvalidFormatException(
+                        null,
+                        "Formato inválido",
+                        "2025/10/10",
+                        LocalDate.class
+                );
+
+        HttpMessageNotReadableException exception =
+                new HttpMessageNotReadableException(
+                        "JSON inválido",
+                        invalidFormatException,
+                        mock(HttpInputMessage.class)
+                );
+
+        var response =
+                globalExceptionHandler.handleInvalidFormat(exception);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+
+        ErrorApiResponse body = response.getBody();
+
+        assertNotNull(body);
+
+        assertEquals(
+                "O corpo da requisição possui campos inválidos",
                 body.getMessage()
         );
 
