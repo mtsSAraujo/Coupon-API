@@ -6,5 +6,12 @@ services:
     ports:
       - "8080:8080"
 
+    ## Opcional para usar o H2 de forma a persistir os dados em memoria
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: persistent
+
+    volumes:
+      - h2-data:/data
+
+volumes:
+  h2-data:
